@@ -1,4 +1,8 @@
+<div align="center">
+
 # Mouse Jiggler
+
+</div>
 
 Simple C++ tool that moves your cursor a few pixels over a certain period of time.
 
