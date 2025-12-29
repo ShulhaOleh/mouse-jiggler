@@ -1,0 +1,4 @@
+// Rescource file for Windows
+
+// Icon for .exe file
+IDI_ICON1 ICON "../resources/mouse-jiggler-icon.ico"

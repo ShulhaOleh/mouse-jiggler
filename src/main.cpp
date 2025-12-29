@@ -7,6 +7,9 @@
 #include <thread>
 #include <chrono>
 
+#include "localization.h"
+#include "command_listener.h"
+
 #if _WIN32
     #include <windows.h>
 #elif __linux__
@@ -14,12 +17,13 @@
 #endif
 
 std::atomic<bool> running(true);
+localization locale("locales");
 
 void mouseJiggler() {
 #if __linux__
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
-        std::cerr << "Failed to open X display\n";
+        std::cerr << locale.get_string("display_error") << std::endl;
         return;
     }
 
@@ -65,31 +69,18 @@ void mouseJiggler() {
 #endif
 }
 
-
-void commandListener() {
-    while (running) {
-        std::string cmd;
-        std::cin >> cmd;
-
-        if (cmd == "q" || cmd == "quit") {
-            running = false;
-            return;
-        }
-    }
-}
-
 int main() {
-    std::cout << "Mouse Jiggler started.\n";
-    std::cout << "Type 'q' to quit.\n";
+    std::cout << locale.get_string("start") << std::endl;
+    std::cout << locale.get_string("commands") << std::endl;
 
     std::thread jiggleThread(mouseJiggler);
-    std::thread commandThread(commandListener);
+    std::thread commandThread(command_listener);
 
     commandThread.join();
     running = false;
     jiggleThread.join();
 
-    std::cout << "Exiting...\n";
+    std::cout << locale.get_string("exiting") << std::endl;
 
     return 0;
 }

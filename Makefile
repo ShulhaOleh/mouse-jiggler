@@ -2,8 +2,14 @@
 
 # Compiler settings
 CXX := g++
-CXXFLAGS := -std=c++14
-SOURCE := main.cpp
+CXXFLAGS := -std=c++14 -Iincludes
+WINDRES := windres
+SRC := src/main.cpp src/localization.cpp src/command_listener.cpp
+RES := src/mouse-jiggler.rc
+RES_OBJ := src/mouse-jiggler.res.o
+OBJ := $(SRC:.cpp=.o)
+
+TARGET := mouse-jiggler
 RELEASE_DIR := release
 
 # Platform detection
@@ -11,40 +17,60 @@ ifeq ($(OS),Windows_NT)
     PLATFORM := Windows
     RM := cmd /C "if exist $(RELEASE_DIR) rmdir /S /Q $(RELEASE_DIR)"
     MKDIR := cmd /C "if not exist $(RELEASE_DIR) mkdir $(RELEASE_DIR)"
+	COPY_LOCALES := cmd /C "xcopy /E /I /Y locales $(RELEASE_DIR)\locales"
+    EXE_EXT := .exe
 else
     PLATFORM := Linux
     RM := rm -rf
     MKDIR := mkdir -p $(RELEASE_DIR)
+    EXE_EXT :=
 endif
 
-# Targets
-.PHONY: clean run help windows linux
-
 # Default target - build for current platform only
+.PHONY: all clean run help windows linux native
+
+all: native
+
 native:
 	@echo "Building for current platform: $(PLATFORM) x64"
-	@echo ""
 ifeq ($(PLATFORM),Windows)
 	@$(MAKE) windows
 else
 	@$(MAKE) linux
 endif
-	@echo ""
 	@echo "========================================"
 	@echo "$(PLATFORM) x64 build complete!"
 	@echo "========================================"
 
 # Windows x64 build
-windows:
+windows: $(OBJ) $(RES_OBJ)
 	@echo "Building Windows x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -static -m64 $(SOURCE) -o $(RELEASE_DIR)/mouse-jiggler-windows-x64.exe
+	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -o $(RELEASE_DIR)/$(TARGET)-windows-x64$(EXE_EXT)
+	@$(COPY_LOCALES)
+ifeq ($(OS),Windows_NT)
+	@cmd /C "if exist src\\*.o del /Q src\\*.o"
+	@cmd /C "if exist src\\*.res.o del /Q src\\*.res.o"
+endif
+
 
 # Linux x64 build
-linux:
+linux: $(OBJ)
 	@echo "Building Linux x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -m64 -pthread $(SOURCE) -o $(RELEASE_DIR)/mouse-jiggler-linux-x64 -lX11
+	$(CXX) $(CXXFLAGS) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)-linux-x64$(EXE_EXT) -lX11
+	@rm -f $(OBJ)
+
+# Compile .cpp to .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Compile .rc to .rc.o ((Windows resources))
+$(RES_OBJ): $(RES)
+ifeq ($(OS),Windows_NT)
+	$(WINDRES) $< -O coff -o $@
+endif
+
 
 clean:
 	@echo "Cleaning build files..."
@@ -53,13 +79,11 @@ clean:
 
 run:
 ifeq ($(OS),Windows_NT)
-	@echo "Building and running Windows x64..."
 	@$(MAKE) windows
-	@$(RELEASE_DIR)\mouse-jiggler-windows-x64.exe
+	@$(RELEASE_DIR)/$(TARGET)-windows-x64$(EXE_EXT)
 else
-	@echo "Building and running Linux x64..."
 	@$(MAKE) linux
-	@./$(RELEASE_DIR)/mouse-jiggler-linux-x64
+	@./$(RELEASE_DIR)/$(TARGET)-linux-x64$(EXE_EXT)
 endif
 
 help:
@@ -69,7 +93,7 @@ help:
 	@echo ""
 	@echo "Available targets:"
 	@echo "  make         - Build x64 for current platform ($(PLATFORM))"
-	@echo "  make all     - Build for current platform (use on each OS separately)"
+	@echo "  make all     - Same as 'make' (build current platform)"
 	@echo "  make windows - Build Windows x64"
 	@echo "  make linux   - Build Linux x64"
 	@echo "  make clean   - Remove all build files"

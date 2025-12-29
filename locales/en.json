@@ -1,0 +1,6 @@
+{
+    "start": "Mouse Jiggler started.",
+    "commands": "Type 'q' to quit.",
+    "exiting": "Exiting...",
+    "display_error": "Failed to open X display"
+}
