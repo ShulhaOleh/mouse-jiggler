@@ -18,7 +18,6 @@ If you need to prevent a utility (a program that tracks your mouse movements) fr
 
 ```
 mouse-jiggler/
-├── .pre-commit-config.yaml
 ├── hooks/
 │   └── pre-commit.py
 ├── includes/
@@ -26,19 +25,21 @@ mouse-jiggler/
 │   └── localization.h
 ├── locales/
 │   └── en.json
-├── Makefile
-├── readme.md
 ├── resources/
 │   ├── mouse-jiggler-bg.png
 │   ├── mouse-jiggler-icon.ico
 │   └── mouse-jiggler-icon.png
 ├── scripts/
 │   └── generate_structure.py
-└── src/
-    ├── command_listener.cpp
-    ├── localization.cpp
-    ├── main.cpp
-    └── mouse-jiggler.rc
+├── src/
+│   ├── command_listener.cpp
+│   ├── localization.cpp
+│   ├── main.cpp
+│   └── mouse-jiggler.rc
+├── .pre-commit-config.yaml
+├── LICENSE
+├── Makefile
+└── readme.md
 ```
 
 <!-- STRUCTURE_END -->
@@ -89,3 +90,8 @@ Enter `q` or `quit` to stop the program.
 
 * In the Linux version, the cursor sticks to the upper left corner of the monitor screen.
 * Currently `localization.cpp` has no Linux realization.
+
+## License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+

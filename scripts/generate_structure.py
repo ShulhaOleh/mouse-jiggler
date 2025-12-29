@@ -16,27 +16,38 @@ EXCLUDED_FILES = {".gitignore"}
 def generate_tree(path: Path, prefix: str = "") -> list[str]:
     lines = []
     try:
-        items = sorted(path.iterdir())
+        items = list(path.iterdir())
     except PermissionError:
         return lines
-    
+
     items = [
         item for item in items
         if item.name not in EXCLUDED_DIRS and item.name not in EXCLUDED_FILES
     ]
-    
-    count = len(items)
-    for i, item in enumerate(items):
+
+    dirs = sorted(
+        (item for item in items if item.is_dir()),
+        key=lambda p: p.name.lower()
+    )
+    files = sorted(
+        (item for item in items if not item.is_dir()),
+        key=lambda p: p.name.lower()
+    )
+
+    ordered_items = dirs + files
+
+    count = len(ordered_items)
+    for i, item in enumerate(ordered_items):
         is_last = (i == count - 1)
         connector = "└── " if is_last else "├── "
-        
+
         name = item.name + ("/" if item.is_dir() else "")
         lines.append(f"{prefix}{connector}{name}")
-        
+
         if item.is_dir():
             new_prefix = f"{prefix}    " if is_last else f"{prefix}│   "
             lines.extend(generate_tree(item, new_prefix))
-    
+
     return lines
 
 
