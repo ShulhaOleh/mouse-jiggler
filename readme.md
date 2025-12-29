@@ -18,6 +18,29 @@ If you need to prevent a utility (a program that tracks your mouse movements) fr
 
 ```
 mouse-jiggler/
+├── hooks
+│   └── generate_structure.py
+├── includes
+│   ├── command_listener.h
+│   └── localization.h
+├── locales
+│   └── en.json
+├── resources
+│   ├── mouse-jiggler-bg.png
+│   ├── mouse-jiggler-icon.ico
+│   └── mouse-jiggler-icon.png
+├── scripts
+│   ├── generate_structure.bat
+│   ├── generate_structure.ps1
+│   └── structure.txt
+├── src
+│   ├── command_listener.cpp
+│   ├── localization.cpp
+│   ├── main.cpp
+│   └── mouse-jiggler.rc
+├── .pre-commit-config.yaml
+├── Makefile
+└── readme.md
 ```
 
 <!-- STRUCTURE_END -->
