@@ -27,9 +27,7 @@ else
 endif
 
 # Default target - build for current platform only
-.PHONY: all clean run help windows linux native
-
-all: native
+.PHONY: all clean run help windows linux native setup
 
 native:
 	@echo "Building for current platform: $(PLATFORM) x64"
@@ -86,6 +84,10 @@ else
 	@./$(RELEASE_DIR)/$(TARGET)-linux-x64$(EXE_EXT)
 endif
 
+setup:
+	pip install --user pre-commit
+	pre-commit install
+
 help:
 	@echo "Mouse Jiggler Makefile"
 	@echo "============================================"
@@ -93,11 +95,9 @@ help:
 	@echo ""
 	@echo "Available targets:"
 	@echo "  make         - Build x64 for current platform ($(PLATFORM))"
-	@echo "  make all     - Same as 'make' (build current platform)"
 	@echo "  make windows - Build Windows x64"
 	@echo "  make linux   - Build Linux x64"
 	@echo "  make clean   - Remove all build files"
 	@echo "  make run     - Build and run x64 build"
+	@echo "  make setup   - Install all hooks for git (need to execute only once)"
 	@echo "  make help    - Show this help"
-	@echo ""
-	@echo "Output directory: $(RELEASE_DIR)/"

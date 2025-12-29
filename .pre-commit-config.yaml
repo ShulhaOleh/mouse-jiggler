@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: generate-structure
+        name: Generate project structure & update README
+        entry: python hooks/generate_structure.py
+        language: system
+        always_run: true
+        stages: [commit]

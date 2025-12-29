@@ -1,0 +1,5 @@
+mouse-jiggler/
+├── .pre-commit-config.yaml
+├── Makefile
+├── hooks
+│   └── generate_structure.py
