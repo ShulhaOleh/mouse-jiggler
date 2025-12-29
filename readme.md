@@ -12,6 +12,16 @@ Simple C++ tool that moves your cursor a few pixels over a certain period of tim
 
 If you need to prevent a utility (a program that tracks your mouse movements) from detecting that you are inactive, this small utility will help you do that.
 
+## Project structure
+
+<!-- STRUCTURE_START -->
+
+```
+mouse-jiggler/
+```
+
+<!-- STRUCTURE_END -->
+
 ## Usage
 
 ### Windows
@@ -31,6 +41,9 @@ Enter `q` or `quit` to stop the program.
 ### Prerequisites
 
 #### Windows
+- [Make](https://gnuwin32.sourceforge.net/packages/make.htm) for Windows
+- In the project root, enter `make setup` to install all hooks
+- [Python3](https://www.python.org/)
 - [MSYS2](https://www.msys2.org/) with MinGW-w64 toolchain
 - Install required packages:
 ```bash
@@ -38,6 +51,9 @@ Enter `q` or `quit` to stop the program.
 ```
 
 #### Linux
+- Make for Linux
+- In the project root, enter `make setup` to install all hooks
+- [Python3](https://www.python.org/)
 - g++ compiler
 - X11 development libraries
 - Install required packages:

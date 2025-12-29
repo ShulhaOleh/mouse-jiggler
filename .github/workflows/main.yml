@@ -1,19 +1,30 @@
 name: CI
-
 on:
   pull_request:
   push:
     branches: [ main ]
-
 jobs:
   check-structure:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+      
+      - name: Install tree utility
+        run: sudo apt-get update && sudo apt-get install -y tree
+      
+      - name: Install PowerShell Core
+        run: |
+          sudo apt-get install -y wget apt-transport-https software-properties-common
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+      
       - name: Run generator and check README
         run: |
           python hooks/generate_structure.py
