@@ -1,9 +1,10 @@
 repos:
   - repo: local
     hooks:
-      - id: generate-structure
-        name: Generate project structure & update README
-        entry: python hooks/generate_structure.py
+      - id: pre-commit-hooks
+        name: Run all project hooks
+        entry: python hooks/pre-commit.py
         language: system
         always_run: true
-        stages: [commit]
+        pass_filenames: false
+        stages: [pre-commit]
