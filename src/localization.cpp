@@ -9,7 +9,9 @@
 #if _WIN32
     #include <windows.h>
 #elif __linux__
-    // future linux code
+    #include <cstdlib>
+    #include <unistd.h>
+    #include <sys/stat.h>
 #endif
 
 
@@ -51,7 +53,26 @@ std::string localization::detect_system_language(){
     return lang;
 
 #elif __linux__
-    // future linux code
+    const char* env = std::getenv("LC_ALL");
+
+    std::string lang;
+    if(env){
+        std::string s(env);
+        size_t p = s.find_first_of("._");
+
+        if(p != std::string::npos) s = s.substr(0, p);
+        if(s.size() >= 2) lang = s.substr(0, 2);
+    }
+
+    if(lang.empty()) lang = default_lang_;
+
+    std::transform(lang.begin(), lang.end(), lang.begin(),
+                   [](unsigned char c){ return std::tolower(c); });
+
+    std::lock_guard<std::mutex> lk(mutex_);
+    current_lang_ = lang;
+    
+    return lang;
 #endif
 }
 
@@ -63,7 +84,8 @@ static bool file_exists(const std::string& p){
     DWORD attr = GetFileAttributesA(p.c_str());
     return attr != INVALID_FILE_ATTRIBUTES && !(attr & FILE_ATTRIBUTE_DIRECTORY);
 #elif __linux__
-    // future linux code
+    struct stat st;
+    return stat(p.c_str(), &st) == 0 && S_ISREG(st.st_mode);
 #endif
 }
 

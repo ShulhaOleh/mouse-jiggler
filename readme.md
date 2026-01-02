@@ -22,6 +22,7 @@ mouse-jiggler/
 │   └── pre-commit.py
 ├── includes/
 │   ├── command_listener.h
+│   ├── jiggler.h
 │   └── localization.h
 ├── locales/
 │   └── en.json
@@ -33,6 +34,8 @@ mouse-jiggler/
 │   └── generate_structure.py
 ├── src/
 │   ├── command_listener.cpp
+│   ├── embedded_locales.cpp
+│   ├── jiggler.cpp
 │   ├── localization.cpp
 │   ├── main.cpp
 │   └── mouse-jiggler.rc

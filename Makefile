@@ -4,7 +4,7 @@
 CXX := g++
 CXXFLAGS := -std=c++14 -Iincludes
 WINDRES := windres
-SRC := src/main.cpp src/localization.cpp src/command_listener.cpp
+SRC := src/main.cpp src/localization.cpp src/command_listener.cpp src/jiggler.cpp
 RES := src/mouse-jiggler.rc
 RES_OBJ := src/mouse-jiggler.res.o
 OBJ := $(SRC:.cpp=.o)
