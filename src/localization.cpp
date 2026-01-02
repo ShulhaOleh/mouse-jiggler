@@ -220,3 +220,5 @@ std::string localization::get_string(const std::string& key, const std::string& 
 
     return key;
 }
+
+localization locale("locales");

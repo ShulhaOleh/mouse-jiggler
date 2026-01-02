@@ -1,7 +1,9 @@
+#include "jiggler.h"
+
+#include <iostream>
 #include <atomic>
 #include <thread>
 
-#include "jiggler.h"
 #include "localization.h"
 
 #if _WIN32

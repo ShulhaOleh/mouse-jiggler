@@ -23,4 +23,6 @@ private:
     mutable std::mutex mutex_;
 };
 
+extern localization locale;
+
 #endif

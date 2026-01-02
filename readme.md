@@ -92,7 +92,7 @@ Enter `q` or `quit` to stop the program.
 ## Known issues
 
 * In the Linux version, the cursor sticks to the upper left corner of the monitor screen.
-* Currently `localization.cpp` has no Linux realization.
+* JSON localization files should be in the same directory with binary file (Windows and Linux versions). Program will work, but without localization.
 
 ## License
 

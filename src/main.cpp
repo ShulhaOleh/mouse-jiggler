@@ -12,7 +12,6 @@
 #include "command_listener.h"
 
 std::atomic<bool> running(true);
-localization locale("locales");
 
 int main() {
     std::cout << locale.get_string("start") << std::endl;
