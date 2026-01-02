@@ -1,0 +1,10 @@
+{
+    "start": "Mouse Jiggler почав роботу.",
+    "commands": "Доступні команди:\n  quit (q) - Вихід з програми\n  lang <code> - Змінити мову (наприклад, en, ru, uk)\n  help - Показати це повідомлення",
+    "exiting": "Вихід...",
+    "display_error": "Не вдалося відкрити X дісплей.",
+    "current_language": "Поточна мова: ",
+    "language_changed": "Мову змінено на: ",
+    "language_usage": "Використання: lang <code> (наприклад, en, ru, uk)",
+    "unknown_command": "Невідома команда: "
+}

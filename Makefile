@@ -4,10 +4,15 @@
 CXX := g++
 CXXFLAGS := -std=c++14 -Iincludes
 WINDRES := windres
-SRC := src/main.cpp src/localization.cpp src/command_listener.cpp src/jiggler.cpp
+SOURCES = src/main.cpp \
+          src/jiggler.cpp \
+          src/localization.cpp \
+          src/commands/command_listener.cpp \
+          src/commands/commands.cpp \
+          src/commands/command_registry.cpp
 RES := src/mouse-jiggler.rc
 RES_OBJ := src/mouse-jiggler.res.o
-OBJ := $(SRC:.cpp=.o)
+OBJ := $(SOURCES:.cpp=.o)
 
 TARGET := mouse-jiggler
 RELEASE_DIR := release
@@ -48,6 +53,7 @@ windows: $(OBJ) $(RES_OBJ)
 	@$(COPY_LOCALES)
 ifeq ($(OS),Windows_NT)
 	@cmd /C "if exist src\\*.o del /Q src\\*.o"
+	@cmd /C "if exist src\\commands\\*.o del /Q src\\commands\\*.o"
 	@cmd /C "if exist src\\*.res.o del /Q src\\*.res.o"
 endif
 
@@ -73,6 +79,13 @@ endif
 clean:
 	@echo "Cleaning build files..."
 	@$(RM)
+ifeq ($(OS),Windows_NT)
+	@cmd /C "if exist src\\*.o del /Q src\\*.o"
+	@cmd /C "if exist src\\commands\\*.o del /Q src\\commands\\*.o"
+	@cmd /C "if exist src\\*.res.o del /Q src\\*.res.o"
+else
+	@rm -f src/*.o src/commands/*.o
+endif
 	@echo "Clean complete."
 
 run:

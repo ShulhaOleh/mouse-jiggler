@@ -9,20 +9,21 @@
 
 #include "jiggler.h"
 #include "localization.h"
-#include "command_listener.h"
+#include "commands/command_listener.h"
 
 std::atomic<bool> running(true);
+extern localization locale;
 
 int main() {
     std::cout << locale.get_string("start") << std::endl;
     std::cout << locale.get_string("commands") << std::endl;
 
-    std::thread jiggleThread(mouse_jiggler);
-    std::thread commandThread(command_listener);
+    std::thread jiggle_thread(mouse_jiggler);
+    std::thread command_thread(command_listener);
 
-    commandThread.join();
+    command_thread.join();
     running = false;
-    jiggleThread.join();
+    jiggle_thread.join();
 
     std::cout << locale.get_string("exiting") << std::endl;
 

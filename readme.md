@@ -21,11 +21,17 @@ mouse-jiggler/
 ├── hooks/
 │   └── pre-commit.py
 ├── includes/
-│   ├── command_listener.h
+│   ├── commands/
+│   │   ├── command.h
+│   │   ├── command_listener.h
+│   │   ├── command_registry.h
+│   │   └── commands.h
 │   ├── jiggler.h
 │   └── localization.h
 ├── locales/
-│   └── en.json
+│   ├── en.json
+│   ├── ru.json
+│   └── uk.json
 ├── resources/
 │   ├── mouse-jiggler-bg.png
 │   ├── mouse-jiggler-icon.ico
@@ -33,8 +39,10 @@ mouse-jiggler/
 ├── scripts/
 │   └── generate_structure.py
 ├── src/
-│   ├── command_listener.cpp
-│   ├── embedded_locales.cpp
+│   ├── commands/
+│   │   ├── command_listener.cpp
+│   │   ├── command_registry.cpp
+│   │   └── commands.cpp
 │   ├── jiggler.cpp
 │   ├── localization.cpp
 │   ├── main.cpp
