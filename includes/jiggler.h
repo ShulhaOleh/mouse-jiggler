@@ -1,6 +1,3 @@
-#ifndef JIGGLER_H
-#define JIGGLER_H
+#pragma once
 
 void mouse_jiggler();
-
-#endif

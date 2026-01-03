@@ -1,5 +1,4 @@
-#ifndef COMMANDS_H
-#define COMMANDS_H
+#pragma once
 
 #include <atomic>
 
@@ -37,5 +36,3 @@ public:
     void execute(const std::vector<std::string>& args) override;
     std::string get_name() const override;
 };
-
-#endif

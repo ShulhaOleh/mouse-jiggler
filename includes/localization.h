@@ -1,5 +1,4 @@
-#ifndef LOCALIZATION_H
-#define LOCALIZATION_H
+#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -24,5 +23,3 @@ private:
 };
 
 extern localization locale;
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -11,5 +10,3 @@ public:
 
     virtual ~command() = default;
 };
-
-#endif

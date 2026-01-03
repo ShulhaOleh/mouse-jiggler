@@ -1,6 +1,3 @@
-#ifndef COMMAND_LISTENER_H
-#define COMMAND_LISTENER_H
+#pragma once
 
 void command_listener();
-
-#endif

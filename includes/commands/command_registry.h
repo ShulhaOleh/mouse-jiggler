@@ -1,5 +1,4 @@
-#ifndef COMMAND_REGISTRY_H
-#define COMMAND_REGISTRY_H
+#pragma once
 
 #include "command.h"
 
@@ -18,5 +17,3 @@ private:
     std::unordered_map<std::string, std::unique_ptr<command>> commands_;
     std::unordered_map<std::string, std::string> aliases_;
 };
-
-#endif
