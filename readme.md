@@ -27,7 +27,8 @@ mouse-jiggler/
 │   │   ├── command_registry.h
 │   │   └── commands.h
 │   ├── jiggler.h
-│   └── localization.h
+│   ├── localization.h
+│   └── version.h
 ├── locales/
 │   ├── en.json
 │   ├── ru.json

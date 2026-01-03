@@ -1,7 +1,9 @@
 #include "commands/commands.h"
 
-#include "localization.h"
 #include <iostream>
+
+#include "localization.h"
+#include "version.h"
 
 extern localization locale;
 
@@ -15,7 +17,7 @@ std::string quit_command::get_name() const {
     return "quit";
 }
 
-void lang_command::execute(const std::vector<std::string>& args) {
+void lang_command::execute (const std::vector<std::string>& args) {
     if (args.empty()) {
         show_current_language();
         return;
@@ -48,4 +50,16 @@ void help_command::execute(const std::vector<std::string>& args) {
 
 std::string help_command::get_name() const {
     return "help";
+}
+
+void version_command::execute(const std::vector<std::string>& args) {
+    std::cout   << PROJECT_NAME << " "
+                << PROJECT_VERSION << " © "
+                << PROJECT_YEAR << " "
+                << PROJECT_AUTHOR << " "
+                << std::endl;
+}
+
+std::string version_command::get_name() const {
+    return "version";
 }

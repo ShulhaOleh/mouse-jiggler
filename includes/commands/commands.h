@@ -1,8 +1,10 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-#include "command.h"
 #include <atomic>
+
+#include "command.h"
+#include "version.h"
 
 class quit_command : public command {
 public:
@@ -25,6 +27,12 @@ private:
 };
 
 class help_command : public command {
+public:
+    void execute(const std::vector<std::string>& args) override;
+    std::string get_name() const override;
+};
+
+class version_command : public command {
 public:
     void execute(const std::vector<std::string>& args) override;
     std::string get_name() const override;
