@@ -1,6 +1,6 @@
 {
     "start": "Mouse Jiggler started.",
-    "commands": "Available commands:\n  quit (q) - Exit the program\n  lang <code> - Change language (e.g., en, ru, uk)\n  help - Show this help message",
+    "commands": "Available commands:\n  quit (q) - Exit the program\n  lang <code> - Change language (e.g., en, ru, uk)\n  help - Show this help message\n  version (v) - Show version information",
     "exiting": "Exiting...",
     "display_error": "Failed to open X display.",
     "current_language": "Current language: ",
