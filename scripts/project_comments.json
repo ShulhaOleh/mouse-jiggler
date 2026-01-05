@@ -1,0 +1,17 @@
+{
+  "includes/": "Project header files",
+  "includes/commands/": "Subsystem for commands",
+  "includes/localization.h": "Localization system",
+  "includes/version.h": "Version information",
+
+  "locales/": "Translation files",
+  
+  "scripts/": "Utility scripts",
+  "scripts/generate_structure.py": "Project tree generator",
+
+  "src/": "Source code",
+  "src/commands/": "Command subsystem implementation",
+  "src/main.cpp": "Application entry point",
+
+  "Makefile": "Build file"
+}

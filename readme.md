@@ -20,16 +20,16 @@ If you need to prevent a utility (a program that tracks your mouse movements) fr
 mouse-jiggler/
 ├── hooks/
 │   └── pre-commit.py
-├── includes/
-│   ├── commands/
+├── includes/                       # Project header files
+│   ├── commands/                   # Subsystem for commands
 │   │   ├── command.h
 │   │   ├── command_listener.h
 │   │   ├── command_registry.h
 │   │   └── commands.h
 │   ├── jiggler.h
-│   ├── localization.h
-│   └── version.h
-├── locales/
+│   ├── localization.h              # Localization system
+│   └── version.h                   # Version information
+├── locales/                        # Translation files
 │   ├── en.json
 │   ├── ru.json
 │   └── uk.json
@@ -37,20 +37,21 @@ mouse-jiggler/
 │   ├── mouse-jiggler-bg.png
 │   ├── mouse-jiggler-icon.ico
 │   └── mouse-jiggler-icon.png
-├── scripts/
-│   └── generate_structure.py
-├── src/
-│   ├── commands/
+├── scripts/                        # Utility scripts
+│   ├── generate_structure.py       # Project tree generator
+│   └── project_comments.json
+├── src/                            # Source code
+│   ├── commands/                   # Command subsystem implementation
 │   │   ├── command_listener.cpp
 │   │   ├── command_registry.cpp
 │   │   └── commands.cpp
 │   ├── jiggler.cpp
 │   ├── localization.cpp
-│   ├── main.cpp
+│   ├── main.cpp                    # Application entry point
 │   └── mouse-jiggler.rc
 ├── .pre-commit-config.yaml
 ├── LICENSE
-├── Makefile
+├── Makefile                        # Build file
 └── readme.md
 ```
 
