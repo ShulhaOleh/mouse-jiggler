@@ -47,11 +47,11 @@ void mouse_jiggler() {
                            &win_x, &win_y,
                            &mask)) {
 
-            XWarpPointer(display, None, root, 0, 0, 0, 0, 1, 0);
+            XWarpPointer(display, None, root, 0, 0, 0, 0, root_x + 1, root_y);
             XFlush(display);
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-            XWarpPointer(display, None, root, 0, 0, 0, 0, -1, 0);
+            XWarpPointer(display, None, root, 0, 0, 0, 0, root_x, root_y);
             XFlush(display);
         }
 #endif
