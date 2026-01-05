@@ -5,8 +5,6 @@
 #include "localization.h"
 #include "version.h"
 
-extern localization locale;
-
 quit_command::quit_command(std::atomic<bool>& running_flag) : running_(running_flag) {}
 
 void quit_command::execute(const std::vector<std::string>& args) {

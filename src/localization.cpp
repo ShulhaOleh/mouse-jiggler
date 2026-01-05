@@ -192,7 +192,11 @@ void localization::ensure_loaded(const std::string& lang) const{
 
     if (cache_.count(lang)) return;
 
+#if _WIN32
     std::string path = locales_dir_ + "\\" + lang + ".json";
+#elif __linux__
+    std::string path = locales_dir_ + "/" + lang + ".json";
+#endif
 
     if (!file_exists(path)) {
         cache_.emplace(lang, dict{});

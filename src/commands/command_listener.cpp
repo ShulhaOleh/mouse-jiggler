@@ -10,7 +10,6 @@
 #include "localization.h"
 
 extern std::atomic<bool> running;
-extern localization locale;
 
 static command_registry create_registry(std::atomic<bool>& running_flag) {
     command_registry registry;
