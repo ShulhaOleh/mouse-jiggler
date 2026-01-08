@@ -16,14 +16,20 @@ std::atomic<bool> running(true);
 
 int main(int argc, char* argv[]) {
     // CLI flags handling
-    if (argc > 1) {
-        if (argv[1] == "--version" || argv[1] == "-v") {
-            std::cout << PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
+    if (argc == 2) {
+        std::string arg = argv[1];
+
+        if (arg == "--version" || arg == "-v") {
+            std::cout << PROJECT_NAME << " "
+                      << PROJECT_VERSION << " © "
+                      << PROJECT_YEAR << " "
+                      << PROJECT_AUTHOR << " "
+                      << std::endl;
 
             return 0;
         }
         
-        if (argv[1] == "--help" || argv[1] == "-h") {
+        if (arg == "--help" || arg == "-h") {
             std::cout << "Options:"                                               << std::endl
                       << "  --version, -v     Show version information"           << std::endl
                       << "  --help, -h        Show this help message"             << std::endl
@@ -36,7 +42,15 @@ int main(int argc, char* argv[]) {
             return 0;
         }
         
-        std::cerr << "Unknown option: " << argv[1] << std::endl;
+        std::cerr << "Unknown option: " << arg << std::endl;
+        std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
+
+        return 1;
+    }
+
+    // Too many arguments
+    if (argc > 2) {
+        std::cerr << "Error: Too many arguments" << std::endl;
         std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
 
         return 1;
