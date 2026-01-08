@@ -49,7 +49,7 @@ endif
 windows: $(OBJ) $(RES_OBJ)
 	@echo "Building Windows x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -o $(RELEASE_DIR)/$(TARGET)-windows-x64$(EXE_EXT)
+	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 	@$(COPY_LOCALES)
 ifeq ($(OS),Windows_NT)
 	@cmd /C "if exist src\\*.o del /Q src\\*.o"
@@ -62,7 +62,7 @@ endif
 linux: $(OBJ)
 	@echo "Building Linux x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)-linux-x64$(EXE_EXT) -lX11
+	$(CXX) $(CXXFLAGS) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT) -lX11
 	@rm -f $(OBJ)
 
 # Compile .cpp to .o
