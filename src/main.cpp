@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
             return 0;
         }
         
-        if (arg == "--help" || arg == "-h") {
+        else if (arg == "--help" || arg == "-h") {
             std::cout << "Options:"                                               << std::endl
                       << "  --version, -v     Show version information"           << std::endl
                       << "  --help, -h        Show this help message"             << std::endl
@@ -38,6 +38,12 @@ int main(int argc, char* argv[]) {
                       << "  lang <code>       Change language (e.g., en, uk, ru)" << std::endl
                       << "  help              Show available commands"            << std::endl
                       << "  version, v        Show version information"           << std::endl;
+
+            return 0;
+        }
+
+        else if (arg == "--update" || arg == "-u") {
+            // Update from github releases   
 
             return 0;
         }
