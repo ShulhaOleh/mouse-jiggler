@@ -3,6 +3,7 @@
   "includes/commands/": "Subsystem for commands",
   "includes/localization.h": "Localization system",
   "includes/version.h": "Version information",
+  "includes/platform.h": "Macros for working with platforms",
 
   "locales/": "Translation files",
   

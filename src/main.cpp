@@ -11,6 +11,7 @@
 #include "jiggler.h"
 #include "localization.h"
 #include "commands/command_listener.h"
+#include "logger.h"
 
 std::atomic<bool> running(true);
 
@@ -50,6 +51,7 @@ int main(int argc, char* argv[]) {
         
         std::cerr << "Unknown option: " << arg << std::endl;
         std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
+        LOG_ERROR("Unknown command line option: " + arg);
 
         return 1;
     }
@@ -58,6 +60,7 @@ int main(int argc, char* argv[]) {
     if (argc > 2) {
         std::cerr << "Error: Too many arguments" << std::endl;
         std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
+        LOG_ERROR("Too many command line arguments provided");
 
         return 1;
     }

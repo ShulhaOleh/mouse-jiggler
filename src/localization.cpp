@@ -6,6 +6,8 @@
 #include <cctype>
 #include <iterator>
 
+#include "platform.h"
+
 #if _WIN32
     #include <windows.h>
 #elif __linux__
@@ -192,11 +194,7 @@ void localization::ensure_loaded(const std::string& lang) const{
 
     if (cache_.count(lang)) return;
 
-#if _WIN32
-    std::string path = locales_dir_ + "\\" + lang + ".json";
-#elif __linux__
-    std::string path = locales_dir_ + "/" + lang + ".json";
-#endif
+    std::string path = locales_dir_ + PATH_SEPARATOR + lang + ".json";
 
     if (!file_exists(path)) {
         cache_.emplace(lang, dict{});

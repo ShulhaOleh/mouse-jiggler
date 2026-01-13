@@ -19,6 +19,7 @@ void mouse_jiggler() {
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
         std::cerr << locale.get_string("display_error") << std::endl;
+        LOG_ERROR("Failed to open X11 display");
         return;
     }
 

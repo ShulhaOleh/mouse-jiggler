@@ -28,6 +28,8 @@ mouse-jiggler/
 │   │   └── commands.h
 │   ├── jiggler.h
 │   ├── localization.h              # Localization system
+│   ├── logger.h
+│   ├── platform.h                  # Macros for working with platforms
 │   └── version.h                   # Version information
 ├── locales/                        # Translation files
 │   ├── en.json
@@ -47,6 +49,7 @@ mouse-jiggler/
 │   │   └── commands.cpp
 │   ├── jiggler.cpp
 │   ├── localization.cpp
+│   ├── logger.cpp
 │   ├── main.cpp                    # Application entry point
 │   └── mouse-jiggler.rc
 ├── .pre-commit-config.yaml

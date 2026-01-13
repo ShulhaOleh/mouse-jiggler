@@ -9,7 +9,8 @@ SOURCES = src/main.cpp \
           src/localization.cpp \
           src/commands/command_listener.cpp \
           src/commands/commands.cpp \
-          src/commands/command_registry.cpp
+          src/commands/command_registry.cpp \
+		  src/logger.cpp
 RES := src/mouse-jiggler.rc
 RES_OBJ := src/mouse-jiggler.res.o
 OBJ := $(SOURCES:.cpp=.o)
@@ -91,10 +92,10 @@ endif
 run:
 ifeq ($(OS),Windows_NT)
 	@$(MAKE) windows
-	@$(RELEASE_DIR)/$(TARGET)-windows-x64$(EXE_EXT)
+	@$(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 else
 	@$(MAKE) linux
-	@./$(RELEASE_DIR)/$(TARGET)-linux-x64$(EXE_EXT)
+	@./$(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 endif
 
 setup:
