@@ -21,11 +21,7 @@ int main(int argc, char* argv[]) {
         std::string arg = argv[1];
 
         if (arg == "--version" || arg == "-v") {
-            std::cout << PROJECT_NAME << " "
-                      << PROJECT_VERSION << " © "
-                      << PROJECT_YEAR << " "
-                      << PROJECT_AUTHOR << " "
-                      << std::endl;
+            std::cout << PROJECT_VERSION << std::endl;
 
             return 0;
         }
