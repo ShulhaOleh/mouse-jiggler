@@ -1,3 +1,5 @@
 release/
 .exe
 .o
+
+.vscode/

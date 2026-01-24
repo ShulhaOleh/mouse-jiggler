@@ -18,8 +18,6 @@ If you need to prevent a utility (a program that tracks your mouse movements) fr
 
 ```
 mouse-jiggler/
-├── .vscode/
-│   └── c_cpp_properties.json
 ├── hooks/
 │   └── pre-commit.py
 ├── includes/                       # Project header files
@@ -103,10 +101,6 @@ Enter `q` or `quit` to stop the program.
   sudo apt update
   sudo apt install build-essential libx11-dev
 ```
-
-## Known issues
-
-* JSON localization files should be in the same directory with binary file (Windows and Linux versions). Program will work, but without localization.
 
 ## License
 

@@ -1,10 +1,13 @@
+/*
+   Localization system implementation with embedded JSON translations
+*/
+
 #include "localization.h"
 
-#include <fstream>
-#include <sstream>
 #include <algorithm>
 #include <cctype>
-#include <iterator>
+#include <span>
+#include <string_view>
 
 #include "platform.h"
 
@@ -12,15 +15,31 @@
     #include <windows.h>
 #elif __linux__
     #include <cstdlib>
-    #include <unistd.h>
-    #include <sys/stat.h>
 #endif
+
+static constexpr unsigned char en_json_data[] = {
+    #embed "../locales/en.json"
+};
+
+static constexpr unsigned char ru_json_data[] = {
+    #embed "../locales/ru.json"
+};
+
+static constexpr unsigned char uk_json_data[] = {
+    #embed "../locales/uk.json"
+};
+
+static const std::unordered_map<std::string, std::span<const unsigned char>> embedded_locales = {
+    {"en", std::span(en_json_data, sizeof(en_json_data))},
+    {"ru", std::span(ru_json_data, sizeof(ru_json_data))},
+    {"uk", std::span(uk_json_data, sizeof(uk_json_data))}
+};
 
 
 // public methods
 
-localization::localization(std::string locales_dir)
-: locales_dir_(move(locales_dir)), current_lang_(), default_lang_("en") {
+localization::localization()
+: current_lang_(), default_lang_("en") {
     detect_system_language();
 }
 
@@ -81,28 +100,6 @@ std::string localization::detect_system_language() {
 
 // private methods
 
-static bool file_exists(const std::string& p) {
-#if _WIN32
-    DWORD attr = GetFileAttributesA(p.c_str());
-    return attr != INVALID_FILE_ATTRIBUTES && !(attr & FILE_ATTRIBUTE_DIRECTORY);
-#elif __linux__
-    struct stat st;
-    return stat(p.c_str(), &st) == 0 && S_ISREG(st.st_mode);
-#endif
-}
-
-static std::string trim(const std::string& s) {
-    size_t a = 0;
-
-    while (a < s.size() && isspace((unsigned char)s[a])) a++;
-
-    size_t b = s.size();
-
-    while (b > a && isspace((unsigned char)s[b-1])) b--;
-
-    return s.substr(a, b - a);
-}
-
 static std::string unescape(const std::string& s) {
     std::string out;
     out.reserve(s.size());
@@ -127,12 +124,10 @@ static std::string unescape(const std::string& s) {
     return out;
 }
 
-localization::dict localization::load_dict(const std::string& path) const {
-    std::ifstream ifs(path);
+localization::dict localization::load_dict_from_memory(std::span<const unsigned char> data) const {
+    if (data.empty()) return {};
 
-    if (!ifs) return {};
-
-    std::string content((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+    std::string_view content(reinterpret_cast<const char*>(data.data()), data.size());
     dict out;
     size_t i = 0;
 
@@ -149,7 +144,7 @@ localization::dict localization::load_dict(const std::string& path) const {
                 continue; 
             }
             if (content[i] == '"') {
-                key = content.substr(kstart, i - kstart);
+                key = std::string(content.substr(kstart, i - kstart));
                 ++i;
                 break;
             }
@@ -175,7 +170,7 @@ localization::dict localization::load_dict(const std::string& path) const {
                 continue;
             }
             if (content[i] == '"') {
-                val = content.substr(vstart, i - vstart);
+                val = std::string(content.substr(vstart, i - vstart));
                 ++i;
                 break;
             }
@@ -189,22 +184,21 @@ localization::dict localization::load_dict(const std::string& path) const {
     return out;
 }
 
-void localization::ensure_loaded(const std::string& lang) const{
+void localization::ensure_loaded(const std::string& lang) const {
     std::lock_guard<std::mutex> lk(mutex_);
 
     if (cache_.count(lang)) return;
 
-    std::string path = locales_dir_ + PATH_SEPARATOR + lang + ".json";
-
-    if (!file_exists(path)) {
-        cache_.emplace(lang, dict{});
+    auto it = embedded_locales.find(lang);
+    if (it != embedded_locales.end()) {
+        cache_.emplace(lang, load_dict_from_memory(it->second));
         return;
     }
 
-    cache_.emplace(lang, load_dict(path));
+    cache_.emplace(lang, dict{});
 }
 
-std::string localization::get_string(const std::string& key, const std::string& missing) const{
+std::string localization::get_string(const std::string& key, const std::string& missing) const {
     std::string lang;
     {
         std::lock_guard<std::mutex> lk(mutex_);
@@ -234,4 +228,4 @@ std::string localization::get_string(const std::string& key, const std::string& 
     return key;
 }
 
-localization locale("locales");
+localization locale;

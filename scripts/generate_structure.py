@@ -11,7 +11,7 @@ COMMENTS_FILE = ROOT / "scripts" / "project_comments.json"
 START = "<!-- STRUCTURE_START -->"
 END = "<!-- STRUCTURE_END -->"
 
-EXCLUDED_DIRS = {".git", ".github", "release"}
+EXCLUDED_DIRS = {".git", ".github", "release", ".vscode"}
 EXCLUDED_FILES = {".gitignore"}
 
 

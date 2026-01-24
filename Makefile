@@ -10,7 +10,7 @@ SOURCES = src/main.cpp \
           src/commands/command_listener.cpp \
           src/commands/commands.cpp \
           src/commands/command_registry.cpp \
-		  src/logger.cpp
+          src/logger.cpp
 RES := src/mouse-jiggler.rc
 RES_OBJ := src/mouse-jiggler.res.o
 OBJ := $(SOURCES:.cpp=.o)
@@ -23,7 +23,6 @@ ifeq ($(OS),Windows_NT)
     PLATFORM := Windows
     RM := cmd /C "if exist $(RELEASE_DIR) rmdir /S /Q $(RELEASE_DIR)"
     MKDIR := cmd /C "if not exist $(RELEASE_DIR) mkdir $(RELEASE_DIR)"
-	COPY_LOCALES := cmd /C "xcopy /E /I /Y locales $(RELEASE_DIR)\locales"
     EXE_EXT := .exe
 else
     PLATFORM := Linux
@@ -51,7 +50,6 @@ windows: $(OBJ) $(RES_OBJ)
 	@echo "Building Windows x64..."
 	@$(MKDIR)
 	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -lstdc++exp -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
-	@$(COPY_LOCALES)
 ifeq ($(OS),Windows_NT)
 	@cmd /C "if exist src\\*.o del /Q src\\*.o"
 	@cmd /C "if exist src\\commands\\*.o del /Q src\\commands\\*.o"
@@ -70,7 +68,7 @@ linux: $(OBJ)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Compile .rc to .rc.o ((Windows resources))
+# Compile .rc to .rc.o (Windows resources)
 $(RES_OBJ): $(RES)
 ifeq ($(OS),Windows_NT)
 	$(WINDRES) $< -O coff -o $@

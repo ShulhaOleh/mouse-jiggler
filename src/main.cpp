@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         std::string arg = argv[1];
 
         if (arg == "--version" || arg == "-v") {
-            std::cout << PROJECT_VERSION << std::endl;
+            std::println("{}", PROJECT_VERSION);
 
             return 0;
         }
