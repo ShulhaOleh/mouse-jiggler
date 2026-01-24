@@ -6,6 +6,7 @@
 #include <atomic>
 #include <thread>
 #include <chrono>
+#include <print>
 
 #include "version.h"
 #include "jiggler.h"
@@ -27,14 +28,15 @@ int main(int argc, char* argv[]) {
         }
         
         else if (arg == "--help" || arg == "-h") {
-            std::cout << "Options:"                                               << std::endl
-                      << "  --version, -v     Show version information"           << std::endl
-                      << "  --help, -h        Show this help message"             << std::endl
-                      << "\nInteractive commands:"                                << std::endl
-                      << "  quit, q           Stop the application"               << std::endl
-                      << "  lang <code>       Change language (e.g., en, uk, ru)" << std::endl
-                      << "  help              Show available commands"            << std::endl
-                      << "  version, v        Show version information"           << std::endl;
+            std::string help_text = "Options:\n"
+                                    "  --version, -v     Show version information\n"
+                                    "  --help, -h        Show this help message\n"
+                                    "\nInteractive commands:\n"
+                                    "  quit, q           Stop the application\n"
+                                    "  lang <code>       Change language (e.g., en, uk, ru)\n"
+                                    "  help              Show available commands\n"
+                                    "  version, v        Show version information";
+            std::println("{}", help_text);
 
             return 0;
         }
@@ -45,8 +47,8 @@ int main(int argc, char* argv[]) {
             return 0;
         }
         
-        std::cerr << "Unknown option: " << arg << std::endl;
-        std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
+        std::println(std::cerr, "Unknown option: {}", arg);
+        std::println(std::cerr, "Try 'mouse-jiggler --help' for more information.");
         LOG_ERROR("Unknown command line option: " + arg);
 
         return 1;
@@ -54,15 +56,15 @@ int main(int argc, char* argv[]) {
 
     // Too many arguments
     if (argc > 2) {
-        std::cerr << "Error: Too many arguments" << std::endl;
-        std::cerr << "Try 'mouse-jiggler --help' for more information." << std::endl;
+        std::println(std::cerr, "Error: Too many arguments");
+        std::println(std::cerr, "Try 'mouse-jiggler --help' for more information.");
         LOG_ERROR("Too many command line arguments provided");
 
         return 1;
     }
 
-    std::cout << locale.get_string("start") << std::endl;
-    std::cout << locale.get_string("commands") << std::endl;
+    std::println("{}", locale.get_string("start"));
+    std::println("{}", locale.get_string("commands"));
 
     std::thread jiggle_thread(mouse_jiggler);
     std::thread command_thread(command_listener);
@@ -71,7 +73,7 @@ int main(int argc, char* argv[]) {
     running = false;
     jiggle_thread.join();
 
-    std::cout << locale.get_string("exiting") << std::endl;
+    std::println("{}", locale.get_string("exiting"));
 
     return 0;
 }

@@ -18,6 +18,8 @@ If you need to prevent a utility (a program that tracks your mouse movements) fr
 
 ```
 mouse-jiggler/
+├── .vscode/
+│   └── c_cpp_properties.json
 ├── hooks/
 │   └── pre-commit.py
 ├── includes/                       # Project header files

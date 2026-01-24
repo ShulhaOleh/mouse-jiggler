@@ -4,6 +4,7 @@
 #include <atomic>
 #include <sstream>
 #include <memory>
+#include <print>
 
 #include "commands/command_registry.h"
 #include "commands/commands.h"
@@ -51,9 +52,8 @@ void command_listener() {
         std::vector<std::string> args = parse_arguments(iss);
         
         if (!registry.execute(command_name, args)) {
-            std::cout << locale.get_string("unknown_command") 
-                      << command_name << std::endl;
-            std::cout << locale.get_string("commands") << std::endl;
+            std::println("{}", locale.get_string("unknown_command", "") + command_name);
+            std::println("{}", locale.get_string("commands"));
         }
     }
 }

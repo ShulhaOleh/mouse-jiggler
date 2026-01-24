@@ -2,7 +2,7 @@
 
 # Compiler settings
 CXX := g++
-CXXFLAGS := -std=c++14 -Iincludes
+CXXFLAGS := -std=c++23 -Iincludes
 WINDRES := windres
 SOURCES = src/main.cpp \
           src/jiggler.cpp \
@@ -50,7 +50,7 @@ endif
 windows: $(OBJ) $(RES_OBJ)
 	@echo "Building Windows x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
+	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -lstdc++exp -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 	@$(COPY_LOCALES)
 ifeq ($(OS),Windows_NT)
 	@cmd /C "if exist src\\*.o del /Q src\\*.o"

@@ -43,7 +43,7 @@ void logger::set_log_file(const std::string& filepath) {
     log_file_.open(log_filepath_, std::ios::out | std::ios::app);
     
     if (!log_file_.is_open())
-        std::cerr << "Failed to open log file: " << log_filepath_ << std::endl;
+        std::println(std::cerr, "Failed to open log file: {}", log_filepath_);
 }
 
 // private methods
@@ -58,7 +58,7 @@ logger::logger() : log_filepath_("logs" PATH_SEPARATOR "mouse-jiggler.log") {
     log_file_.open(log_filepath_, std::ios::out | std::ios::app);
     
     if (!log_file_.is_open())
-        std::cerr << "Failed to open log file: " << log_filepath_ << std::endl;
+        std::println(std::cerr, "Failed to open log file: {}", log_filepath_);
 }
 
 logger::~logger() {

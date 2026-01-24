@@ -1,6 +1,7 @@
 #include "commands/commands.h"
 
 #include <iostream>
+#include <print>
 
 #include "localization.h"
 #include "version.h"
@@ -29,21 +30,18 @@ std::string lang_command::get_name() const {
 }
 
 void lang_command::show_current_language() const {
-    std::cout << locale.get_string("current_language") 
-              << locale.detect_system_language() << std::endl;
-    std::cout << locale.get_string("language_usage") 
-              << std::endl;
+    std::println("{}", locale.get_string("current_language") + locale.detect_system_language());
+    std::println("{}", locale.get_string("language_usage"));
 }
 
 void lang_command::change_language(const std::string& lang) const {
     locale.set_language(lang);
-    std::cout << locale.get_string("language_changed") 
-              << lang << std::endl;
-    std::cout << locale.get_string("commands") << std::endl;
+    std::println("{}{}", locale.get_string("language_changed"), lang);
+    std::println("{}", locale.get_string("commands"));
 }
 
 void help_command::execute(const std::vector<std::string>& args) {
-    std::cout << locale.get_string("commands") << std::endl;
+    std::println("{}", locale.get_string("commands"));
 }
 
 std::string help_command::get_name() const {
@@ -51,11 +49,7 @@ std::string help_command::get_name() const {
 }
 
 void version_command::execute(const std::vector<std::string>& args) {
-    std::cout   << PROJECT_NAME << " "
-                << PROJECT_VERSION << " © "
-                << PROJECT_YEAR << " "
-                << PROJECT_AUTHOR << " "
-                << std::endl;
+    std::println("{} {} © {} {}", PROJECT_NAME, PROJECT_VERSION, PROJECT_YEAR, PROJECT_AUTHOR);
 }
 
 std::string version_command::get_name() const {
