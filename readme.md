@@ -92,7 +92,7 @@ Enter `q` or `quit` to stop the program.
 - Make for Linux
 - In the project root, enter `make setup` to install all hooks
 - [Python3](https://www.python.org/)
-- g++ compiler
+- GCC 14.0.0+
 - X11 development libraries
 - Install required packages:
   
