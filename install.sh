@@ -2,7 +2,7 @@
 set -e
 
 REPO="ShulhaOleh/mouse-jiggler"
-BINARY="mouse-jiggler-x64"
+BINARY="mouse-jiggler-x86_64"
 INSTALL_DIR="/usr/local/bin"
 UDEV_RULES_DIR="/etc/udev/rules.d"
 UDEV_RULE="99-mouse-jiggler.rules"

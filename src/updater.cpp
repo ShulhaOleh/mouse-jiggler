@@ -71,12 +71,13 @@ static std::string get_latest_version() {
 }
 
 static std::string get_download_url(const std::string& version) {
-    std::string base = "https://github.com/ShulhaOleh/mouse-jiggler/releases/download/"
-                       + version + "/mouse-jiggler-x64";
+
 #if _WIN32
-    return base + ".exe";
+    return "https://github.com/ShulhaOleh/mouse-jiggler/releases/download/"
+           + version + "/mouse-jiggler-x86_64.exe";
 #else
-    return base;
+    return "https://github.com/ShulhaOleh/mouse-jiggler/releases/download/"
+           + version + "/mouse-jiggler-x86_64";
 #endif
 }
 

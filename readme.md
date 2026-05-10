@@ -6,7 +6,7 @@
 
 </div>
 
-Simple C++ tool that moves your cursor a few pixels over a certain period of time for Windows and Linux (x64). On Linux, mouse input is emulated via the kernel's `uinput` interface, which works on both X11 and Wayland.
+Simple C++ tool that moves your cursor a few pixels over a certain period of time for Windows and Linux (x86_64). On Linux, mouse input is emulated via the kernel's `uinput` interface, which works on both X11 and Wayland.
 
 ## Purpose
 
@@ -64,7 +64,7 @@ mouse-jiggler/
 
 ### Windows
 ```cmd
-mouse-jiggler-windows-x64.exe
+mouse-jiggler-x86_64.exe
 ```
 
 ### Linux
