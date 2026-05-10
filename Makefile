@@ -9,6 +9,7 @@ WINDRES := windres
 SOURCES = src/main.cpp \
           src/jiggler.cpp \
           src/localization.cpp \
+          src/updater.cpp \
           src/commands/command_listener.cpp \
           src/commands/commands.cpp \
           src/commands/command_registry.cpp \

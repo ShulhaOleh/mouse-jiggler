@@ -14,6 +14,7 @@
 #include "localization.h"
 #include "commands/command_listener.h"
 #include "logger.h"
+#include "updater.h"
 
 #if __linux__
     #include <unistd.h>
@@ -48,8 +49,7 @@ int main(int argc, char* argv[]) {
         }
 
         else if (arg == "--update" || arg == "-u") {
-            // Update from github releases
-
+            run_update();
             return 0;
         }
 
