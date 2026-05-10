@@ -15,10 +15,7 @@
 #include "commands/command_listener.h"
 #include "logger.h"
 #include "updater.h"
-
-#if __linux__
-    #include <unistd.h>
-#endif
+#include "uninstaller.h"
 
 std::atomic<bool> running(true);
 
@@ -54,34 +51,7 @@ int main(int argc, char* argv[]) {
         }
 
         else if (arg == "--uninstall") {
-#if __linux__
-            if (geteuid() != 0) {
-                std::println(std::cerr, "Please run as root: sudo mouse-jiggler --uninstall");
-                return 1;
-            }
-
-            namespace fs = std::filesystem;
-            std::error_code ec;
-            bool ok = true;
-
-            if (!fs::remove("/etc/udev/rules.d/99-mouse-jiggler.rules", ec)) {
-                std::println(std::cerr, "Failed to remove udev rule: {}", ec.message());
-                ok = false;
-            }
-
-            std::system("udevadm control --reload-rules");
-
-            if (!fs::remove("/usr/local/bin/mouse-jiggler", ec)) {
-                std::println(std::cerr, "Failed to remove binary: {}", ec.message());
-                ok = false;
-            }
-
-            if (ok) std::println("Uninstalled successfully.");
-            return ok ? 0 : 1;
-#else
-            std::println(std::cerr, "Uninstall is not supported on this platform.");
-            return 1;
-#endif
+            return uninstall();
         }
         
         std::println(std::cerr, "Unknown option: {}", arg);

@@ -10,6 +10,7 @@ SOURCES = src/main.cpp \
           src/jiggler.cpp \
           src/localization.cpp \
           src/updater.cpp \
+          src/uninstaller.cpp \
           src/commands/command_listener.cpp \
           src/commands/commands.cpp \
           src/commands/command_registry.cpp \
@@ -54,7 +55,7 @@ endif
 windows: $(OBJ) $(RES_OBJ)
 	@echo "Building Windows x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -lstdc++exp -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
+	$(CXX) $(CXXFLAGS) -static -m64 $(OBJ) $(RES_OBJ) -lstdc++exp -ladvapi32 -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 ifeq ($(OS),Windows_NT)
 	@cmd /C "if exist src\\*.o del /Q src\\*.o"
 	@cmd /C "if exist src\\commands\\*.o del /Q src\\commands\\*.o"

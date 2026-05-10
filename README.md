@@ -30,6 +30,7 @@ mouse-jiggler/
 │   ├── localization.h              # Localization system
 │   ├── logger.h
 │   ├── platform.h                  # Macros for working with platforms
+│   ├── uninstaller.h
 │   ├── updater.h
 │   └── version.h                   # Version information
 ├── locales/                        # Translation files
@@ -55,6 +56,7 @@ mouse-jiggler/
 │   ├── logger.cpp
 │   ├── main.cpp                    # Application entry point
 │   ├── mouse-jiggler.rc
+│   ├── uninstaller.cpp
 │   └── updater.cpp
 ├── .pre-commit-config.yaml
 ├── install.ps1
