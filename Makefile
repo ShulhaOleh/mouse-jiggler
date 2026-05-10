@@ -19,6 +19,8 @@ OBJ := $(SOURCES:.cpp=.o)
 
 TARGET := mouse-jiggler
 RELEASE_DIR := release
+INSTALL_DIR := /usr/local/bin
+UDEV_RULES_DIR := /etc/udev/rules.d
 
 # Platform detection
 ifeq ($(OS),Windows_NT)
@@ -34,7 +36,7 @@ else
 endif
 
 # Default target - build for current platform only
-.PHONY: all clean run help windows linux native setup
+.PHONY: all clean run help windows linux native setup install uninstall
 
 native:
 	@echo "Building for current platform: $(PLATFORM) x64"
@@ -98,6 +100,21 @@ else
 	@./$(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 endif
 
+install:
+	@echo "Installing mouse-jiggler..."
+	install -Dm755 $(RELEASE_DIR)/$(TARGET) $(INSTALL_DIR)/$(TARGET)
+	install -Dm644 rules/99-mouse-jiggler.rules $(UDEV_RULES_DIR)/99-mouse-jiggler.rules
+	udevadm control --reload-rules
+	udevadm trigger
+	@echo "Done. Log out and back in if /dev/uinput was not yet accessible."
+
+uninstall:
+	@echo "Uninstalling mouse-jiggler..."
+	rm -f $(INSTALL_DIR)/$(TARGET)
+	rm -f $(UDEV_RULES_DIR)/99-mouse-jiggler.rules
+	udevadm control --reload-rules
+	@echo "Done."
+
 setup:
 	pip install --user pre-commit
 	pre-commit install
@@ -113,5 +130,7 @@ help:
 	@echo "  make linux   - Build Linux x64"
 	@echo "  make clean   - Remove all build files"
 	@echo "  make run     - Build and run x64 build"
-	@echo "  make setup   - Install all hooks for git (need to execute only once)"
-	@echo "  make help    - Show this help"
+	@echo "  make setup     - Install all hooks for git (need to execute only once)"
+	@echo "  make install   - Install binary and udev rule system-wide (Linux, requires sudo)"
+	@echo "  make uninstall - Remove binary and udev rule (Linux, requires sudo)"
+	@echo "  make help      - Show this help"
