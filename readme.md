@@ -6,7 +6,7 @@
 
 </div>
 
-Simple C++ tool that moves your cursor a few pixels over a certain period of time for Windows and Linux (x64).
+Simple C++ tool that moves your cursor a few pixels over a certain period of time for Windows and Linux (x64). On Linux, mouse input is emulated via the kernel's `uinput` interface, which works on both X11 and Wayland.
 
 ## Purpose
 
@@ -93,14 +93,20 @@ Enter `q` or `quit` to stop the program.
 - In the project root, enter `make setup` to install all hooks
 - [Python3](https://www.python.org/)
 - GCC 14.0.0+
-- X11 development libraries
+- `uinput` kernel module (enabled by default on most distributions)
 - Install required packages:
-  
+
   **Ubuntu/Debian:**
 ```bash
   sudo apt update
-  sudo apt install build-essential libx11-dev
+  sudo apt install build-essential
 ```
+
+> **Note:** `/dev/uinput` requires elevated permissions. Either run as root, or add your user to the `input` group:
+> ```bash
+> sudo usermod -aG input $USER
+> ```
+> Log out and back in for the change to take effect.
 
 ## License
 
