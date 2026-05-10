@@ -68,8 +68,16 @@ mouse-jiggler-windows-x64.exe
 ```
 
 ### Linux
+
+**Install (recommended):**
 ```bash
-./mouse-jiggler-linux-x64
+curl -sSL https://raw.githubusercontent.com/ShulhaOleh/mouse-jiggler/main/install.sh | sudo bash
+```
+This installs the binary to `/usr/local/bin/` and sets up the required udev rule automatically.
+
+**Run manually (after install):**
+```bash
+mouse-jiggler
 ```
 
 Enter `q` or `quit` to stop the program.
