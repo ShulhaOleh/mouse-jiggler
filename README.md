@@ -61,7 +61,7 @@ mouse-jiggler/
 ├── install.sh
 ├── LICENSE
 ├── Makefile                        # Build file
-└── readme.md
+└── README.md
 ```
 
 <!-- STRUCTURE_END -->
@@ -69,8 +69,16 @@ mouse-jiggler/
 ## Usage
 
 ### Windows
+
+**Install (recommended, requires Administrator):**
+```powershell
+irm https://raw.githubusercontent.com/ShulhaOleh/mouse-jiggler/main/install.ps1 | iex
+```
+This installs the binary to `C:\Program Files\mouse-jiggler\` and adds it to the system `PATH` automatically.
+
+**Run manually (after install):**
 ```cmd
-mouse-jiggler-x86_64.exe
+mouse-jiggler
 ```
 
 ### Linux
