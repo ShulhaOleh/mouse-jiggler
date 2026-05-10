@@ -61,7 +61,7 @@ endif
 linux: $(OBJ)
 	@echo "Building Linux x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT) -lX11
+	$(CXX) $(CXXFLAGS) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 	@rm -f $(OBJ)
 
 # Compile .cpp to .o

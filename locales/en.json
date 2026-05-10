@@ -6,5 +6,6 @@
     "current_language": "Current language: ",
     "language_changed": "Language changed to: ",
     "language_usage": "Usage: lang <code> (e.g., en, ru, uk)",
-    "unknown_command": "Unknown command: "
+    "unknown_command": "Unknown command: ",
+    "uinput_error": "Failed to open /dev/uinput. Make sure you are in the 'input' group or run as root."
 }

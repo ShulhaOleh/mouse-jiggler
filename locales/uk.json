@@ -6,5 +6,6 @@
     "current_language": "Поточна мова: ",
     "language_changed": "Мову змінено на: ",
     "language_usage": "Використання: lang <code> (наприклад, en, ru, uk)",
-    "unknown_command": "Невідома команда: "
+    "unknown_command": "Невідома команда: ",
+    "uinput_error": "Не вдалося відкрити /dev/uinput. Переконайтеся, що ви у групі 'input' або запустіть від імені root."
 }
