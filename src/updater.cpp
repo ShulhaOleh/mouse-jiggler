@@ -57,11 +57,13 @@ static std::string get_latest_version() {
         "curl -sSL \"https://api.github.com/repos/ShulhaOleh/mouse-jiggler/releases/latest\""
     );
 
-    const std::string key = "\"tag_name\":\"";
-    size_t pos = json.find(key);
+    size_t pos = json.find("\"tag_name\"");
     if (pos == std::string::npos) return {};
 
-    pos += key.size();
+    pos = json.find('"', json.find(':', pos) + 1);
+    if (pos == std::string::npos) return {};
+
+    ++pos;
     size_t end = json.find('"', pos);
     if (end == std::string::npos) return {};
 
