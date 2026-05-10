@@ -40,7 +40,7 @@ jobs:
 
       - name: Build
         shell: msys2 {0}
-        run: make windows VERSION=${{ github.ref_name }}
+        run: mkdir -p release && make windows VERSION=${{ github.ref_name }}
 
       - name: Rename binary
         shell: msys2 {0}
