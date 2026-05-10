@@ -30,6 +30,7 @@ mouse-jiggler/
 │   ├── localization.h              # Localization system
 │   ├── logger.h
 │   ├── platform.h                  # Macros for working with platforms
+│   ├── updater.h
 │   └── version.h                   # Version information
 ├── locales/                        # Translation files
 │   ├── en.json
@@ -39,6 +40,8 @@ mouse-jiggler/
 │   ├── mouse-jiggler-bg.png
 │   ├── mouse-jiggler-icon.ico
 │   └── mouse-jiggler-icon.png
+├── rules/
+│   └── 99-mouse-jiggler.rules
 ├── scripts/                        # Utility scripts
 │   ├── generate_structure.py       # Project tree generator
 │   └── project_comments.json
@@ -51,8 +54,11 @@ mouse-jiggler/
 │   ├── localization.cpp
 │   ├── logger.cpp
 │   ├── main.cpp                    # Application entry point
-│   └── mouse-jiggler.rc
+│   ├── mouse-jiggler.rc
+│   └── updater.cpp
 ├── .pre-commit-config.yaml
+├── install.ps1
+├── install.sh
 ├── LICENSE
 ├── Makefile                        # Build file
 └── readme.md
