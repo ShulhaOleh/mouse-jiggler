@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
             std::string help_text = "Options:\n"
                                     "  --version, -v     Show version information\n"
                                     "  --help, -h        Show this help message\n"
-                                    "  --uninstall       Remove binary and udev rule (Linux, requires sudo)\n"
+                                    "  --uninstall       Uninstall the application (requires admin/sudo)\n"
                                     "\nInteractive commands:\n"
                                     "  quit, q           Stop the application\n"
                                     "  lang <code>       Change language (e.g., en, uk, ru)\n"
