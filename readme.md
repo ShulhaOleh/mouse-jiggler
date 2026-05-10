@@ -82,6 +82,13 @@ mouse-jiggler
 
 Enter `q` or `quit` to stop the program.
 
+## Logs
+
+| Platform | Location |
+|----------|----------|
+| Linux    | `~/.local/share/mouse-jiggler/mouse-jiggler.log` |
+| Windows  | `%APPDATA%\mouse-jiggler\mouse-jiggler.log` |
+
 ## Building from Source
 
 ### Prerequisites
