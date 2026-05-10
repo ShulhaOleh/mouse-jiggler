@@ -2,7 +2,9 @@
 
 # Compiler settings
 CXX := g++
-CXXFLAGS := -std=c++23 -Iincludes
+VERSION ?= dev
+STATIC  ?= 0
+CXXFLAGS := -std=c++23 -Iincludes -DPROJECT_VERSION=\"$(VERSION)\"
 WINDRES := windres
 SOURCES = src/main.cpp \
           src/jiggler.cpp \
@@ -61,7 +63,7 @@ endif
 linux: $(OBJ)
 	@echo "Building Linux x64..."
 	@$(MKDIR)
-	$(CXX) $(CXXFLAGS) -static -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
+	$(CXX) $(CXXFLAGS) $(if $(filter 1,$(STATIC)),-static) -m64 -pthread $(OBJ) -o $(RELEASE_DIR)/$(TARGET)$(EXE_EXT)
 	@rm -f $(OBJ)
 
 # Compile .cpp to .o
