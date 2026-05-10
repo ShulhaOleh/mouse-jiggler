@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/includes"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "linux-gcc-x64",
+            "defines": ["PROJECT_VERSION=\"dev\""]
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/includes"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "windows-gcc-x64",
+            "defines": ["PROJECT_VERSION=\"dev\""]
+        }
+    ],
+    "version": 4
+}
