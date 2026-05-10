@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <sstream>
 #include <chrono>
+#include <cstdlib>
 #include <ctime>
 
 #include "platform.h"
@@ -48,13 +49,21 @@ void logger::set_log_file(const std::string& filepath) {
 
 // private methods
 
-logger::logger() : log_filepath_("logs" PATH_SEPARATOR "mouse-jiggler.log") {
+static std::string resolve_log_path() {
 #if _WIN32
-    _mkdir("logs");
+    const char* appdata = std::getenv("APPDATA");
+    std::string dir = appdata ? std::string(appdata) + "\\mouse-jiggler" : "logs";
+    _mkdir(dir.c_str());
+    return dir + "\\mouse-jiggler.log";
 #elif __linux__
-    mkdir("logs", DIR_PERMISSIONS);
+    const char* home = std::getenv("HOME");
+    std::string dir = home ? std::string(home) + "/.local/share/mouse-jiggler" : "logs";
+    mkdir(dir.c_str(), DIR_PERMISSIONS);
+    return dir + "/mouse-jiggler.log";
 #endif
-    
+}
+
+logger::logger() : log_filepath_(resolve_log_path()) {
     log_file_.open(log_filepath_, std::ios::out | std::ios::app);
     
     if (!log_file_.is_open())
