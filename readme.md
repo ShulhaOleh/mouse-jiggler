@@ -110,6 +110,11 @@ Enter `q` or `quit` to stop the program.
   sudo apt install build-essential
 ```
 
+  **Fedora:**
+```bash
+  sudo dnf install gcc-c++ make
+```
+
 > **Note:** `/dev/uinput` requires elevated permissions. Either run as root, or add your user to the `input` group:
 > ```bash
 > sudo usermod -aG input $USER
